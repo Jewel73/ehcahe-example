@@ -26,6 +26,7 @@ public class TestController {
         return testService.getAllTests(page, size);
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<Test> getTestById(@PathVariable Long id) {
         Optional<Test> test = testService.getTestById(id);

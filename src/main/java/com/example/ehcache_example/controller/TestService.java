@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,8 @@ public class TestService {
 
     @Cacheable(value = "pageCache", key = "#page + '-' + #size")
     public Page<Test> getAllTests(int page, int size) {
-        return testRepository.findAll(PageRequest.of(page, size));
+        Pageable content = Pageable.ofSize(size).withPage(page);
+        return testRepository.findAll(content);
     }
 
     public Optional<Test> getTestById(Long id) {
